@@ -12,6 +12,8 @@ import numpy as np
 
 class BaseBlock(nn.Module):
 
+    '''Base block including conv and batch norm'''
+
     def __init__(self, in_channels, out_channels):
         super(BaseBlock, self).__init__()
         self.subsampling = 2 if in_channels != out_channels else 1
@@ -30,6 +32,8 @@ class BaseBlock(nn.Module):
         return out
 
 class ResBlock(nn.Module):
+
+    '''Base which conteins residual connection'''
 
     def __init__(self, in_channels, out_channels, base_block = BaseBlock):
 
@@ -59,6 +63,9 @@ class ResBlock(nn.Module):
         return out
 
 class ResLayer(nn.Module):
+
+    '''Stacked ResBcloks'''
+
     def __init__(self, in_channels, out_channels, block=ResBlock, n=1):
         super(ResLayer, self).__init__()
         self.layer = nn.Sequential(
@@ -70,6 +77,9 @@ class ResLayer(nn.Module):
         return out
 
 class ResEnter(nn.Module):
+
+    '''First part of resner where image will be convolved'''
+
     def __init__(self, in_channels, out_channels):
         super(ResEnter, self).__init__()
         self.enter_seq = nn.Sequential(
@@ -83,6 +93,9 @@ class ResEnter(nn.Module):
         return out
 
 class ResExit(nn.Module):
+
+    '''Fully connected part to decod to labels'''
+
     def __init__(self, in_features, n_classes):
         super().__init__()
         self.avg = nn.AdaptiveAvgPool2d((1, 1))
@@ -94,6 +107,9 @@ class ResExit(nn.Module):
         return out
 
 class ResMidLine(nn.Module):
+
+    '''Main part of the net wich stacks together res layers'''
+
     def __init__(self, sizes=[16, 32, 64], depths = [2, 2, 2], block=ResBlock):
         super().__init__()
         self.in_out_block_sizes = list(zip(sizes, sizes[1:]))
@@ -108,6 +124,9 @@ class ResMidLine(nn.Module):
         return x
 
 class ResNet(nn.Module):
+
+    '''Full net '''
+    
     def __init__(self, sizes=[16, 32, 64], depths = [2, 2, 2]):
         super(ResNet, self).__init__()
         self.enter = ResEnter(3, sizes[0])

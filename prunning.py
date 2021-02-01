@@ -14,10 +14,10 @@ import numpy as np
 def clusterize(weights_tensor, num_clusters):
 
     w_shape = weights_tensor.size()
-    straighted = weights_tensor.view(-1, w_shape[-1] * w_shape[-1])
+    straighted = weights_tensor.view(-1, w_shape[-1] * w_shape[-1]) # staringt the input params tensor to one liner vector
 
-    cluster_ids_x, cluster_centers = kmeans(X=straighted, num_clusters=num_clusters)
-    return torch.nn.Parameter(cluster_centers[cluster_ids_x].view(w_shape))
+    cluster_ids_x, cluster_centers = kmeans(X=straighted, num_clusters=num_clusters) # train kmeans
+    return torch.nn.Parameter(cluster_centers[cluster_ids_x].view(w_shape)) # replace values with centroids
 
 
 def main():
@@ -71,4 +71,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    

@@ -16,6 +16,7 @@ def main():
     # Assuming that we are on a CUDA machine, this should print a CUDA device:
     print(device)
 
+    # get data
     transform = transforms.Compose(
         [transforms.ToTensor(),
          transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
@@ -33,12 +34,16 @@ def main():
     classes = ('plane', 'car', 'bird', 'cat',
                'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
+    # define net
     res_net = ResNet()
     res_net.to(device)
+
+    #optimizer
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(res_net.parameters(), lr=0.01, momentum=0.9)
 
-    for epoch in range(100):  # loop over the dataset multiple times
+    # run training loop thriught epochs
+    for epoch in range(100):
 
         running_loss = 0.0
         for i, data in enumerate(trainloader, 0):
@@ -64,6 +69,7 @@ def main():
 
     print('Finished Training')
 
+    #calc accuracy by class and in total
     class_correct = list(0. for i in range(10))
     class_total = list(0. for i in range(10))
     with torch.no_grad():
@@ -95,6 +101,7 @@ def main():
     print('Accuracy of the network on the 10000 test images: %d %%' % (
         100 * correct / total))
 
+    #save model weigths
     PATH = './cifar_net_my_100_epoch_001lr.pth'
     torch.save(res_net.state_dict(), PATH)
 

@@ -42,16 +42,16 @@ Accuracy of truck : 87 %
 Кол-во кластеров во всех свертках одинаковое и равно - 3.
 Это дало следующие изменения в точности относительно базового варианта.
 
-Accuracy of plane : +2 %
-Accuracy of   car : -1 %
-Accuracy of  bird : -3 %
-Accuracy of   cat : -3 %
-Accuracy of  deer : -4 %
-Accuracy of   dog : -2 %
-Accuracy of  frog : 0 %
-Accuracy of horse : -4 %
-Accuracy of  ship : -2 %
-Accuracy of truck : -1 %
+Accuracy of plane : +2 %  
+Accuracy of   car : -1 %  
+Accuracy of  bird : -3 %  
+Accuracy of   cat : -3 %  
+Accuracy of  deer : -4 %  
+Accuracy of   dog : -2 %  
+Accuracy of  frog : 0 %  
+Accuracy of horse : -4 %  
+Accuracy of  ship : -2 %  
+Accuracy of truck : -1 %  
 
 В среднем ухудшение на 1.8%.
 
